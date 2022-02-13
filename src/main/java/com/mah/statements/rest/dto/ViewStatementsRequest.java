@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class ViewStatementsRequest {
 
     @NotNull(message = "Account ID must not be null")

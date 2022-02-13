@@ -7,7 +7,6 @@ import com.mah.statements.rest.dto.ViewStatementsResponse;
 import com.mah.statements.service.StatementsService;
 import com.mah.statements.service.model.ViewStatementsRequestModel;
 import com.mah.statements.util.enums.UserType;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +18,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/statements")
-@RequiredArgsConstructor
 public class StatementsController {
 
     private final StatementsService statementsService;
+
+    public StatementsController(StatementsService statementsService) {
+        this.statementsService = statementsService;
+    }
 
     @PostMapping(value = "/viewStatements")
     public ResponseEntity<ViewStatementsResponse> viewStatements(@Valid @RequestBody ViewStatementsRequest viewStatementsRequest) {
@@ -31,7 +33,7 @@ public class StatementsController {
         ViewStatementsRequestModel viewStatementsRequestModel = ViewStatementsRequestMapper.INSTANCE.mapToDto(viewStatementsRequest);
         viewStatementsRequestModel.setUserType(userType);
 
-        return Optional.of(statementsService.viewStatements(viewStatementsRequestModel))
+        return Optional.ofNullable(statementsService.viewStatements(viewStatementsRequestModel))
                 .map(ViewStatementsResponseMapper.INSTANCE::map)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.noContent().build());

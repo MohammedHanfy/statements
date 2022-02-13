@@ -10,8 +10,6 @@ import com.mah.statements.service.model.StatementModel;
 import com.mah.statements.service.model.ViewStatementsRequestModel;
 import com.mah.statements.service.model.ViewStatementsResponseModel;
 import com.mah.statements.util.enums.UserType;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -22,13 +20,16 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
-@RequiredArgsConstructor
 public class StatementsServiceImpl implements StatementsService {
 
     private final AccountRepository accountRepository;
 
     private final StatementRepository statementRepository;
+
+    public StatementsServiceImpl(AccountRepository accountRepository, StatementRepository statementRepository) {
+        this.accountRepository = accountRepository;
+        this.statementRepository = statementRepository;
+    }
 
     @Override
     public ViewStatementsResponseModel viewStatements(ViewStatementsRequestModel viewStatementsRequestModel) {
