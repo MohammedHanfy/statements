@@ -35,7 +35,7 @@ public class StatementRepositoryTest {
 
         Statement statement = new Statement();
         statement.setAccountId(account.getId());
-        statement.setDatefield(new Date().toString());
+        statement.setDateField(new Date().toString());
         statement.setAmount("TEST_AMOUNT");
 
         Assertions.assertNotNull(statementRepository.save(statement));

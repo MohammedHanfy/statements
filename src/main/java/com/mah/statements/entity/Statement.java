@@ -21,7 +21,7 @@ public class Statement {
     private Long accountId;
 
     @Column(name = "datefield")
-    private String datefield;
+    private String dateField;
 
     @Column(name = "amount")
     private String amount;
