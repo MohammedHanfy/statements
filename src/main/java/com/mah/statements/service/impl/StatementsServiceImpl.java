@@ -116,9 +116,14 @@ public class StatementsServiceImpl implements StatementsService {
 
         return ViewStatementsResponseModel.builder()
                 .accountId(accountModel.getId())
-                .accountNumber(accountModel.getAccountNumber())
+                .accountNumber(hashAccountNumber(accountModel.getAccountNumber()))
                 .statementDetails(statementDetails)
                 .build();
+    }
+
+    private String hashAccountNumber(String accountNumber) {
+
+        return accountNumber.replace(accountNumber.substring(0, accountNumber.length() - 3), "#########");
     }
 }
 

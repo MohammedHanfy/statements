@@ -21,7 +21,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -44,7 +43,7 @@ class StatementsControllerTest {
     private static final List<Statement> statements = StatementProvider.buildStatements();
 
     @Test
-    public void whenCallingViewStatements_withValidRequest_thenReturnsResponseEntityWithOkStatus() {
+    void whenCallingViewStatements_withValidRequest_thenReturnsResponseEntityWithOkStatus() {
 
         ViewStatementsResponseModel statementsResponseModel = ViewStatementsResponseModelProvider
                 .buildViewStatementsResponseModelBuilder(account, statements, ViewStatementActionType.DEFAULT, new HashMap<>());
@@ -63,7 +62,7 @@ class StatementsControllerTest {
     }
 
     @Test
-    public void whenCallingViewStatements_withInValidRequest_thenReturnsResponseEntityWithNoContentStatus() {
+    void whenCallingViewStatements_withInValidRequest_thenReturnsResponseEntityWithNoContentStatus() {
 
         Mockito.when(statementsService.viewStatements(Mockito.any())).thenReturn(null);
 

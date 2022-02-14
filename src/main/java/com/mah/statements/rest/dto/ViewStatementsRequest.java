@@ -30,6 +30,7 @@ public class ViewStatementsRequest {
     @NoArgsConstructor
     @AllArgsConstructor
     @ToString
+    @Builder
     @ValidDateRange
     public static class DateRange {
 
@@ -43,6 +44,7 @@ public class ViewStatementsRequest {
     @NoArgsConstructor
     @AllArgsConstructor
     @ToString
+    @Builder
     @ValidAmountRange
     public static class AmountRange {
 

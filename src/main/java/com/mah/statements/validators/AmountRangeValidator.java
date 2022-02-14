@@ -11,6 +11,8 @@ import java.util.Objects;
 
 public class AmountRangeValidator implements ConstraintValidator<ValidAmountRange, ViewStatementsRequest.AmountRange> {
 
+    private static final String MESSAGE = "message";
+
     @Override
     public void initialize(ValidAmountRange constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
@@ -21,31 +23,31 @@ public class AmountRangeValidator implements ConstraintValidator<ValidAmountRang
 
         if (Objects.isNull(amountRange.getFromAmount())) {
 
-            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter("message", "fromAmount must not be null");
+            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter(MESSAGE, "fromAmount must not be null");
             return false;
         }
 
         if (Objects.isNull(amountRange.getToAmount())) {
 
-            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter("message", "toAmount must not be null");
+            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter(MESSAGE, "toAmount must not be null");
             return false;
         }
 
         if (amountRange.getFromAmount().compareTo(BigDecimal.ZERO) < 0) {
 
-            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter("message", "fromAmount must be a valid number greater than or equal 0");
+            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter(MESSAGE, "fromAmount must be a valid number greater than or equal 0");
             return false;
         }
 
         if (amountRange.getToAmount().compareTo(BigDecimal.ZERO) < 0 ) {
 
-            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter("message", "toAmount must be a valid number greater than or equal 0");
+            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter(MESSAGE, "toAmount must be a valid number greater than or equal 0");
             return false;
         }
 
         if (amountRange.getFromAmount().compareTo(amountRange.getToAmount()) > 0) {
 
-            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter("message", "fromAmount must be less than or equal to toAmount");
+            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter(MESSAGE, "fromAmount must be less than or equal to toAmount");
             return false;
         }
 

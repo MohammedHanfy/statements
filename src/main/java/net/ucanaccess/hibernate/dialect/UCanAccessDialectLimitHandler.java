@@ -15,45 +15,38 @@
  */
 package net.ucanaccess.hibernate.dialect;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.dialect.pagination.LimitHandler;
 import org.hibernate.engine.spi.RowSelection;
 
+import java.sql.PreparedStatement;
+
 /**
- * 
  * Hibernate dialect for UCanAccess - limit handler for query results
- * 
  */
+@Slf4j
 public class UCanAccessDialectLimitHandler implements LimitHandler {
 
     @Override
-    public int bindLimitParametersAtEndOfQuery(RowSelection selection, PreparedStatement statement, int index)
-            throws SQLException {
-         System.out.println("Prep State bindLimitEnd: " + statement);
-        // (not used)
+    public int bindLimitParametersAtEndOfQuery(RowSelection selection, PreparedStatement statement, int index) {
         return 0;
     }
 
     @Override
-    public int bindLimitParametersAtStartOfQuery(RowSelection selection, PreparedStatement statement, int index)
-            throws SQLException {
-        // (not used)
-        System.out.println("Prep State bindLimitStart: " + statement);
+    public int bindLimitParametersAtStartOfQuery(RowSelection selection, PreparedStatement statement, int index) {
         return 0;
     }
 
     @Override
     public String processSql(String sql, RowSelection selection) {
-        System.out.println("ProcessSQL:" + sql);
+
+        log.debug("ProcessSQL:" + sql);
+
         return String.format("%s limit %d offset %d", sql, selection.getMaxRows(), selection.getFirstRow());
     }
 
     @Override
-    public void setMaxRows(RowSelection selection, PreparedStatement statement) throws SQLException {
-         System.out.println("Prep State setMax: " + statement);
-        // (not used)
+    public void setMaxRows(RowSelection selection, PreparedStatement statement) {
     }
 
     @Override
@@ -65,5 +58,4 @@ public class UCanAccessDialectLimitHandler implements LimitHandler {
     public boolean supportsLimitOffset() {
         return true;
     }
-
 }

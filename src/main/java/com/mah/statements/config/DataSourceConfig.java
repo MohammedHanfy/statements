@@ -28,7 +28,7 @@ public class DataSourceConfig {
     @Bean
     public DataSource dataSource() {
 
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        var dataSourceBuilder = DataSourceBuilder.create();
 
         dataSourceBuilder.driverClassName(propertiesConfig.getDataBaseProperties().getDriverClassName());
         dataSourceBuilder.url(propertiesConfig.getDataBaseProperties().getUrl());
@@ -42,7 +42,7 @@ public class DataSourceConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
 
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        var entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setPackagesToScan("com.mah.statements.entity");
@@ -55,7 +55,7 @@ public class DataSourceConfig {
     @Bean
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        var transactionManager = new JpaTransactionManager();
 
         transactionManager.setEntityManagerFactory(entityManagerFactory);
 
@@ -69,7 +69,7 @@ public class DataSourceConfig {
 
     private Properties properties() {
 
-        Properties properties = new Properties();
+        var properties = new Properties();
 
         properties.put("hibernate.dialect", propertiesConfig.getHibernateProperties().getDialect());
         properties.put("hibernate.hbm2ddl.auto", propertiesConfig.getHibernateProperties().getHbm2ddlAuto());

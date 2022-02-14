@@ -22,7 +22,7 @@ public class ViewStatementsResponseModelProvider {
 
         return ViewStatementsResponseModel.builder()
                 .accountId(account.getId())
-                .accountNumber(account.getAccountNumber())
+                .accountNumber(hashAccountNumber(account.getAccountNumber()))
                 .statementDetails(buildStatementDetails(viewStatementActionType, statements, requestMap))
                 .build();
     }
@@ -86,5 +86,10 @@ public class ViewStatementsResponseModelProvider {
                                 .build())
                 .collect(Collectors.toList());
 
+    }
+
+    private static String hashAccountNumber(String accountNumber) {
+
+        return accountNumber.replace(accountNumber.substring(0, accountNumber.length() - 3), "#########");
     }
 }

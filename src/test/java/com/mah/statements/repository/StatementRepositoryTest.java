@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.Date;
 
 @DataJpaTest
-public class StatementRepositoryTest {
+class StatementRepositoryTest {
 
     @Autowired
     StatementRepository statementRepository;
@@ -19,13 +19,13 @@ public class StatementRepositoryTest {
     AccountRepository accountRepository;
 
     @Test
-    public void findAllStatements() {
+    void findAllStatements() {
 
         Assertions.assertTrue(statementRepository.findAll().isEmpty());
     }
 
     @Test
-    public void findAllStatementsWhenAddNewStatement() {
+    void findAllStatementsWhenAddNewStatement() {
 
         Account account = new Account();
         account.setAccountType("TEST_ACCOUNT_TYPE");

@@ -49,7 +49,7 @@ class StatementsServiceImplTest {
     private static final List<Statement> statements = StatementProvider.buildStatements();
 
     @Test
-    public void viewStatements_withNotFoundAccount_throwsEntityNotFoundException() {
+    void viewStatements_withNotFoundAccount_throwsEntityNotFoundException() {
 
         Throwable entityNotFoundException = Assertions.assertThrows(
                 EntityNotFoundException.class, () -> statementsService.viewStatements(

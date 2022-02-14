@@ -13,6 +13,8 @@ import java.util.Objects;
 
 public class DateRangeValidator implements ConstraintValidator<ValidDateRange, ViewStatementsRequest.DateRange> {
 
+    private static final String MESSAGE = "message";
+
     @Override
     public void initialize(ValidDateRange constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
@@ -23,18 +25,19 @@ public class DateRangeValidator implements ConstraintValidator<ValidDateRange, V
 
         if (Objects.isNull(dateRange.getFromDate())) {
 
-            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter("message", "fromDate must not be null");
+            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter(MESSAGE, "fromDate must not be null");
             return false;
         }
 
         if (Objects.isNull(dateRange.getToDate())) {
 
-            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter("message", "toDate must not be null");
+            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter(MESSAGE, "toDate must not be null");
             return false;
         }
 
-        LocalDate now = LocalDate.now();
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        final var now = LocalDate.now();
+
+        final var dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
         LocalDate fromDate;
 
@@ -44,13 +47,13 @@ public class DateRangeValidator implements ConstraintValidator<ValidDateRange, V
 
         } catch (DateTimeParseException dateTimeParseException) {
 
-            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter("message", "fromDate must be in proper date format dd.MM.yyyy ex. 13.02.2022");
+            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter(MESSAGE, "fromDate must be in proper date format dd.MM.yyyy ex. 13.02.2022");
             return false;
         }
 
         if (fromDate.isAfter(now) || fromDate.isEqual(now)) {
 
-            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter("message", "fromDate must be in the past");
+            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter(MESSAGE, "fromDate must be in the past");
             return false;
         }
 
@@ -62,19 +65,19 @@ public class DateRangeValidator implements ConstraintValidator<ValidDateRange, V
 
         } catch (DateTimeParseException dateTimeParseException) {
 
-            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter("message", "toDate must be in proper date format dd.MM.yyyy ex. 13.02.2022");
+            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter(MESSAGE, "toDate must be in proper date format dd.MM.yyyy ex. 13.02.2022");
             return false;
         }
 
         if (toDate.isAfter(now)) {
 
-            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter("message", "toDate must be in the past or today");
+            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter(MESSAGE, "toDate must be in the past or today");
             return false;
         }
 
         if (fromDate.isAfter(toDate)) {
 
-            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter("message", "fromDate must be before toDate");
+            ((ConstraintValidatorContextImpl) constraintValidatorContext).addMessageParameter(MESSAGE, "fromDate must be before toDate");
             return false;
         }
 

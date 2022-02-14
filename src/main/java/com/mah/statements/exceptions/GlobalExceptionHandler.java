@@ -27,22 +27,22 @@ public class GlobalExceptionHandler {
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
 
-        GlobalError globalError = GlobalError.builder()
+        var globalError = GlobalError.builder()
                 .errorMessages(errors)
                 .timestamp(LocalDate.now())
                 .build();
 
-        return new ResponseEntity(globalError, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(globalError, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = EntityNotFoundException.class)
     public ResponseEntity<GlobalError> handleEntityNotFoundException(EntityNotFoundException userNotFoundException) {
 
-        GlobalError globalError = GlobalError.builder()
+        var globalError = GlobalError.builder()
                 .errorMessage(userNotFoundException.getMessage())
                 .timestamp(LocalDate.now())
                 .build();
 
-        return new ResponseEntity(globalError, new HttpHeaders(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(globalError, new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 }

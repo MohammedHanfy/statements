@@ -7,19 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
-public class AccountRepositoryTest {
+class AccountRepositoryTest {
 
     @Autowired
     AccountRepository accountRepository;
 
     @Test
-    public void findAllAccounts() {
+    void findAllAccounts() {
 
         Assertions.assertTrue(accountRepository.findAll().isEmpty());
     }
 
     @Test
-    public void findAllAccountsWhenAddNewAccount() {
+    void findAllAccountsWhenAddNewAccount() {
 
         Account account = new Account();
         account.setAccountType("TEST_ACCOUNT_TYPE");

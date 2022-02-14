@@ -48,5 +48,4 @@ public class UCanAccessDialectUniqueDelegate implements UniqueDelegate {
     public String getAlterTableToDropUniqueKeyCommand(UniqueKey uniqueKey, Metadata metadata, SqlStringGenerationContext sqlStringGenerationContext) {
         return null;
     }
-
 }
