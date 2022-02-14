@@ -15,7 +15,6 @@
  */
 package net.ucanaccess.hibernate.dialect;
 
-import lombok.extern.slf4j.Slf4j;
 import org.hibernate.dialect.pagination.LimitHandler;
 import org.hibernate.engine.spi.RowSelection;
 
@@ -24,7 +23,6 @@ import java.sql.PreparedStatement;
 /**
  * Hibernate dialect for UCanAccess - limit handler for query results
  */
-@Slf4j
 public class UCanAccessDialectLimitHandler implements LimitHandler {
 
     @Override
@@ -39,8 +37,6 @@ public class UCanAccessDialectLimitHandler implements LimitHandler {
 
     @Override
     public String processSql(String sql, RowSelection selection) {
-
-        log.debug("ProcessSQL:" + sql);
 
         return String.format("%s limit %d offset %d", sql, selection.getMaxRows(), selection.getFirstRow());
     }

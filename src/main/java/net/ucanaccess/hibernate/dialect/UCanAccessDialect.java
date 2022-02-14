@@ -34,7 +34,6 @@ public class UCanAccessDialect extends SQLServerDialect {
 
         super();
 
-        // lets UCanAccess determine if it is working with Hibernate
         System.setProperty(this.getClass().getName() + ".isActive", "true");
 
         registerColumnType(Types.INTEGER, "LONG");

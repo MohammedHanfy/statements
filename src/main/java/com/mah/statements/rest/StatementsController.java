@@ -34,7 +34,6 @@ public class StatementsController {
         var userType = UserType.valueOf(httpServletRequest.getUserPrincipal().getName().toUpperCase(Locale.getDefault()));
 
         var viewStatementsRequestModel = ViewStatementsRequestMapper.INSTANCE.mapToDto(viewStatementsRequest);
-
         viewStatementsRequestModel.setUserType(userType);
 
         return Optional.ofNullable(statementsService.viewStatements(viewStatementsRequestModel))
