@@ -50,15 +50,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(globalError, new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<GlobalError> handleEntityNotFoundException(Exception exception) {
+    @ExceptionHandler(value = RuntimeException.class)
+    public ResponseEntity<GlobalError> handleRuntimeException(RuntimeException exception) {
 
         var globalError = GlobalError.builder()
                 .errorMessage("Service not available at the moment, please try again later.")
                 .timestamp(LocalDate.now())
                 .build();
 
-        log.warn(String.format("Exception with error: %s", exception.getMessage()));
+        log.warn(String.format("RuntimeException with error: %s", exception.getMessage()));
 
         return new ResponseEntity<>(globalError, new HttpHeaders(), HttpStatus.SERVICE_UNAVAILABLE);
     }

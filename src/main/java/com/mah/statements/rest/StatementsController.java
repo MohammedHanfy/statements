@@ -7,7 +7,7 @@ import com.mah.statements.rest.dto.ViewStatementsResponse;
 import com.mah.statements.service.StatementsService;
 import com.mah.statements.util.enums.UserType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +27,7 @@ public class StatementsController {
         this.statementsService = statementsService;
     }
 
-    @GetMapping(value = "/viewStatements")
+    @PostMapping(value = "/viewStatements")
     public ResponseEntity<ViewStatementsResponse> viewStatements(HttpServletRequest httpServletRequest,
                                                                  @Valid @RequestBody ViewStatementsRequest viewStatementsRequest) {
 
