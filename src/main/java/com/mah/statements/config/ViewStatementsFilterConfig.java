@@ -2,6 +2,7 @@ package com.mah.statements.config;
 
 import com.mah.statements.util.enums.UserRole;
 import com.mah.statements.wrappers.RequestWrapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+@Slf4j
 @Component
 public class ViewStatementsFilterConfig extends OncePerRequestFilter {
 
@@ -37,6 +39,8 @@ public class ViewStatementsFilterConfig extends OncePerRequestFilter {
                 var requestAsString = StreamUtils.copyToString(requestWrapper.getInputStream(), StandardCharsets.UTF_8);
 
                 if (requestAsString.contains("dateRange") || requestAsString.contains("amountRange")) {
+
+                    log.info("Unauthorized request to POST /api/statements/viewStatements API for a user with role USER");
 
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                     return;

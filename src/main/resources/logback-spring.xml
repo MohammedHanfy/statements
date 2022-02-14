@@ -28,10 +28,6 @@
             <appender-ref ref="FILE-ROLLING"/>
         </root>
 
-        <root name="org.springframework.web.filter.CommonsRequestLoggingFilter" level="debug">
-            <appender-ref ref="FILE-ROLLING"/>
-        </root>
-
     </springProfile>
 
 </configuration>

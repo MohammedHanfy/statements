@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         FilterRegistrationBean<ViewStatementsFilterConfig> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new ViewStatementsFilterConfig());
-        registrationBean.addUrlPatterns("/api/statements/viewStatements/*");
+        registrationBean.addUrlPatterns("/api/statements/viewStatements");
 
         return registrationBean;
     }
