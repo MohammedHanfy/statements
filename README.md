@@ -67,3 +67,6 @@ UnitTest_CoverageReport.zip
 > [Login Page](http://localhost:8099/login)
 >
 > [Logout Page](http://localhost:8099/logout)
+
+* Actuator Health
+> [Health Page](http://localhost:8099/actuator/health)
