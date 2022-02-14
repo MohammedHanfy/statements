@@ -12,6 +12,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.validation.Payload;
 import java.lang.annotation.Annotation;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 @ExtendWith(MockitoExtension.class)
@@ -58,6 +60,7 @@ class DateRangeValidatorTest {
                 Arguments.of(ViewStatementsRequest.DateRange.builder().fromDate("01.01.2022").build()),
                 Arguments.of(ViewStatementsRequest.DateRange.builder().fromDate("01/01/2022").toDate("01.02.2022").build()),
                 Arguments.of(ViewStatementsRequest.DateRange.builder().fromDate("01.01.2023").toDate("01.02.2022").build()),
+                Arguments.of(ViewStatementsRequest.DateRange.builder().fromDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))).toDate("01.02.2022").build()),
                 Arguments.of(ViewStatementsRequest.DateRange.builder().fromDate("01.01.2022").toDate("01/02/2022").build()),
                 Arguments.of(ViewStatementsRequest.DateRange.builder().fromDate("01.01.2022").toDate("01.02.2023").build()),
                 Arguments.of(ViewStatementsRequest.DateRange.builder().fromDate("01.02.2022").toDate("01.01.2022").build())

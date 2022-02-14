@@ -51,9 +51,10 @@ class StatementsServiceImplTest {
     @Test
     void viewStatements_withNotFoundAccount_throwsEntityNotFoundException() {
 
+        var ViewStatementsRequestModel = ViewStatementsRequestModelProvider.buildViewStatementsRequestModel(UserType.ADMIN, account).build();
+
         Throwable entityNotFoundException = Assertions.assertThrows(
-                EntityNotFoundException.class, () -> statementsService.viewStatements(
-                        ViewStatementsRequestModelProvider.buildViewStatementsRequestModel(UserType.ADMIN, account).build()));
+                EntityNotFoundException.class, () -> statementsService.viewStatements(ViewStatementsRequestModel));
 
         Assertions.assertEquals(entityNotFoundException.getMessage(), String.format("Account with ID: %s not found", account.getId()));
     }

@@ -4,6 +4,7 @@ import com.mah.statements.entity.Account;
 import com.mah.statements.entity.Statement;
 import com.mah.statements.mappers.StatementMapper;
 import com.mah.statements.service.model.StatementModel;
+import com.mah.statements.service.model.ViewStatementDetailsModel;
 import com.mah.statements.service.model.ViewStatementsResponseModel;
 import com.mah.statements.util.ViewStatementActionType;
 
@@ -27,9 +28,9 @@ public class ViewStatementsResponseModelProvider {
                 .build();
     }
 
-    public static List<ViewStatementsResponseModel.StatementDetails> buildStatementDetails(ViewStatementActionType viewStatementActionType,
-                                                                                           List<Statement> statements,
-                                                                                           Map<String, Object> requestMap) {
+    public static List<ViewStatementDetailsModel> buildStatementDetails(ViewStatementActionType viewStatementActionType,
+                                                                        List<Statement> statements,
+                                                                        Map<String, Object> requestMap) {
 
         List<StatementModel> statementModelList;
 
@@ -80,7 +81,7 @@ public class ViewStatementsResponseModelProvider {
 
         return statementModelList.stream()
                 .map(statementModel ->
-                        ViewStatementsResponseModel.StatementDetails.builder()
+                        ViewStatementDetailsModel.builder()
                                 .date(statementModel.getDateField())
                                 .amount(statementModel.getAmount())
                                 .build())

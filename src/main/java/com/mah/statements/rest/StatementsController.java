@@ -5,7 +5,6 @@ import com.mah.statements.mappers.ViewStatementsResponseMapper;
 import com.mah.statements.rest.dto.ViewStatementsRequest;
 import com.mah.statements.rest.dto.ViewStatementsResponse;
 import com.mah.statements.service.StatementsService;
-import com.mah.statements.service.model.ViewStatementsRequestModel;
 import com.mah.statements.util.enums.UserType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +31,9 @@ public class StatementsController {
     public ResponseEntity<ViewStatementsResponse> viewStatements(HttpServletRequest httpServletRequest,
                                                                  @Valid @RequestBody ViewStatementsRequest viewStatementsRequest) {
 
-        UserType userType = UserType.valueOf(httpServletRequest.getUserPrincipal().getName().toUpperCase(Locale.getDefault()));
+        var userType = UserType.valueOf(httpServletRequest.getUserPrincipal().getName().toUpperCase(Locale.getDefault()));
 
-        ViewStatementsRequestModel viewStatementsRequestModel = ViewStatementsRequestMapper.INSTANCE.mapToDto(viewStatementsRequest);
+        var viewStatementsRequestModel = ViewStatementsRequestMapper.INSTANCE.mapToDto(viewStatementsRequest);
 
         viewStatementsRequestModel.setUserType(userType);
 

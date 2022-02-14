@@ -2,8 +2,6 @@ package com.mah.statements.service.model;
 
 import lombok.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -18,18 +16,5 @@ public class ViewStatementsResponseModel {
 
     private String accountNumber;
 
-    private List<StatementDetails> statementDetails;
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    @ToString
-    public static class StatementDetails {
-
-        private LocalDate date;
-
-        private BigDecimal amount;
-    }
+    private List<ViewStatementDetailsModel> statementDetails;
 }

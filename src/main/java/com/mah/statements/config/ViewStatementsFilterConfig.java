@@ -3,7 +3,6 @@ package com.mah.statements.config;
 import com.mah.statements.util.enums.UserRole;
 import com.mah.statements.wrappers.RequestWrapper;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -25,17 +24,17 @@ public class ViewStatementsFilterConfig extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
 
-            boolean hasRoleUser = authentication.getAuthorities().contains(new SimpleGrantedAuthority(UserRole.ROLE_USER.name()));
+            var hasRoleUser = authentication.getAuthorities().contains(new SimpleGrantedAuthority(UserRole.ROLE_USER.name()));
 
             if (hasRoleUser) {
 
-                RequestWrapper requestWrapper = new RequestWrapper(request);
+                var requestWrapper = new RequestWrapper(request);
 
-                String requestAsString = StreamUtils.copyToString(requestWrapper.getInputStream(), StandardCharsets.UTF_8);
+                var requestAsString = StreamUtils.copyToString(requestWrapper.getInputStream(), StandardCharsets.UTF_8);
 
                 if (requestAsString.contains("dateRange") || requestAsString.contains("amountRange")) {
 

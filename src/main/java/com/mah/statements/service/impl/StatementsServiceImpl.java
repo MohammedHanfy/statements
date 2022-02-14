@@ -5,10 +5,7 @@ import com.mah.statements.mappers.StatementMapper;
 import com.mah.statements.repository.AccountRepository;
 import com.mah.statements.repository.StatementRepository;
 import com.mah.statements.service.StatementsService;
-import com.mah.statements.service.model.AccountModel;
-import com.mah.statements.service.model.StatementModel;
-import com.mah.statements.service.model.ViewStatementsRequestModel;
-import com.mah.statements.service.model.ViewStatementsResponseModel;
+import com.mah.statements.service.model.*;
 import com.mah.statements.util.enums.UserType;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +31,7 @@ public class StatementsServiceImpl implements StatementsService {
     @Override
     public ViewStatementsResponseModel viewStatements(ViewStatementsRequestModel viewStatementsRequestModel) {
 
-        AccountModel accountModel = accountRepository.findById(viewStatementsRequestModel.getAccountId())
+        var accountModel = accountRepository.findById(viewStatementsRequestModel.getAccountId())
                 .map(AccountMapper.INSTANCE::mapToDto)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Account with ID: %s not found", viewStatementsRequestModel.getAccountId())));
 
@@ -52,7 +49,7 @@ public class StatementsServiceImpl implements StatementsService {
             statementModelList = viewDefaultStatements(statementModelList);
         }
 
-        return buildViewStatementsResponseDto(accountModel, statementModelList, viewStatementsRequestModel);
+        return buildViewStatementsResponseDto(accountModel, statementModelList);
     }
 
     private List<StatementModel> viewFilteredStatements(List<StatementModel> statementModelList, ViewStatementsRequestModel viewStatementsRequestModel) {
@@ -104,11 +101,11 @@ public class StatementsServiceImpl implements StatementsService {
                 .collect(Collectors.toList());
     }
 
-    private ViewStatementsResponseModel buildViewStatementsResponseDto(AccountModel accountModel, List<StatementModel> statementModelList, ViewStatementsRequestModel viewStatementsRequestModel) {
+    private ViewStatementsResponseModel buildViewStatementsResponseDto(AccountModel accountModel, List<StatementModel> statementModelList) {
 
-        List<ViewStatementsResponseModel.StatementDetails> statementDetails = statementModelList.stream()
+        List<ViewStatementDetailsModel> statementDetails = statementModelList.stream()
                 .map(statementModel ->
-                        ViewStatementsResponseModel.StatementDetails.builder()
+                        ViewStatementDetailsModel.builder()
                                 .date(statementModel.getDateField())
                                 .amount(statementModel.getAmount())
                                 .build())

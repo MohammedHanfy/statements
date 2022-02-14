@@ -47,6 +47,8 @@ public class UCanAccessDialectLimitHandler implements LimitHandler {
 
     @Override
     public void setMaxRows(RowSelection selection, PreparedStatement statement) {
+
+        // Not used
     }
 
     @Override
