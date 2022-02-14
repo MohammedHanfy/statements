@@ -53,7 +53,7 @@ Statements Service.postman_collection.json
 >
 > **Logout API:** Logout.
 
-* Unit Test COverage Report
+* Unit Test Coverage Report
 ```
 UnitTest_CoverageReport.zip
 ```
